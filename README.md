@@ -2,13 +2,15 @@
 
 ## Getting Started
 
-Welcome to [Static job listing page]! This project is built using HTML, CSS, and JavaScript and help user to find listings of  Jobs with filtering.
+Welcome to [Static job listing page]! This project is built using HTML, CSS, and JavaScript and help user to find listings of Jobs with filtering.
 
 ### How to Run
+
 To run the project locally, simply follow these steps:
 
 1. Clone the repository to your local machine:git clone https://github.com/afolabi-ola/Static-Job-Listing.git
 2. Navigate to the project directory:cd static-job-listing
+   3.Launch the mock database using json-server --watch data/db.json
 3. Open the `index.html` file in your web browser.
 
 That's it! You're now ready to explore job listings with Static Job Listing.
@@ -30,7 +32,6 @@ We welcome contributions from everyone! If you're interested in contributing to 
 13. 12. Wait for feedback and address any requested changes.
 14. Merge after approval. 🚢
 
-
 ## Code Style
 
 Please adhere to the following code style guidelines:
@@ -46,4 +47,3 @@ If you encounter any bugs or have suggestions for improvements, please open an i
 ## License
 
 This project is licensed under the [License Name] License - see the [LICENSE.md](LICENSE.md) file for details.
-
