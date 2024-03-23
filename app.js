@@ -1,18 +1,29 @@
 "use strict";
 
 const contentsContainer = document.querySelector(".contents");
-console.log(contentsContainer);
+
+const url = "data/db.json";
+
+const alertUser = function (params) {
+  alert(params);
+};
 
 const renderListings = async () => {
-  let url = "data/db.json";
-  let res = await fetch(url);
-  let lists = await res.json();
-  console.log(lists);
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(
+        `Could not connect to Server. Please refresh the page and try again`
+      );
+    }
+    const lists = await res.json();
 
-  let template = "";
-  lists.forEach((list, i) => {
-    template += `
-    <div class="content">
+    let template = "";
+    lists.forEach((list, i) => {
+      template += `
+    <div class="content" data-role=${list.role} data-level=${
+        list.level
+      } data-languages=${list.languages} data-tools=${list.tools}>
     <div class="left">
       <div class="image">
         <img src="${list.logo}" alt="${list.company}" />
@@ -47,8 +58,11 @@ const renderListings = async () => {
 
   </div>
     `;
-  });
-  contentsContainer.innerHTML = template;
+    });
+    contentsContainer.innerHTML = template;
+  } catch (error) {
+    alertUser(error);
+  }
 };
 
 window.addEventListener("DOMContentLoaded", () => renderListings());
