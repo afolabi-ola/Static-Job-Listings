@@ -107,14 +107,57 @@ window.addEventListener("DOMContentLoaded", () => {
       cont.addEventListener("click", (e) => {
         if (e.target.classList.contains("categories")) {
           let category = e.target.textContent.trim();
-          const tab = handleCreateElement("tab", "p", "tab");
-          tab.innerHTML = `${category} <span class='tab-span'>&times</span>`;
-          handleAppendElement(tabcont, tab);
-          document.querySelector(".contents").prepend(tabOverall);
           handleFilterByRole_Level(jobs, category);
+          e.target.classList.add("active");
+        }
+        if (e.target.classList.contains("active")) {
+          let category = e.target.textContent.trim();
+          // Check if tab already exists for the selected category
+          if (!tabcont.querySelector(`.tab[data-category="${category}"]`)) {
+            const tab = handleCreateElement("tab", "p", "tab");
+            tab.innerHTML = `${category} <span class='tab-span'>&times</span>`;
+            tab.setAttribute("data-category", category);
+            handleAppendElement(tabcont, tab);
+            contentsContainer.prepend(tabOverall);
+          }
         }
       });
     });
+
+    tabcont.addEventListener("click", (e) => {
+      if (e.target.classList.contains("tab-span")) {
+        const tab = e.target.parentElement;
+        const category = tab.getAttribute("data-category");
+        tab.remove();
+
+        jobs.forEach((job) => {
+          job.style.display = "flex";
+        });
+
+        document.querySelectorAll(".tab").forEach((tab) => {
+          const category = tab.getAttribute("data-category");
+          jobs.forEach((job) => {
+            const role = job.getAttribute("data-role");
+            const level = job.getAttribute("data-level");
+            if (role !== category && level !== category) {
+              job.style.display = "none";
+            }
+          });
+        });
+      }
+    });
+
+    tabOverall.addEventListener("click", (e) => {
+      if (e.target.classList.contains("tabclear")) {
+        const tab = tabcont.querySelectorAll(".tab");
+        tab.forEach((tab) => {
+          tab.remove();
+          tabOverall.remove();
+        });
+        jobs.forEach((job) => {
+          job.style.display = "flex";
+        });
+      }
+    });
   });
 });
-
