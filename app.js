@@ -1,11 +1,40 @@
 "use strict";
 
 const contentsContainer = document.querySelector(".contents");
-
+let jobs;
+let buttonsContainer;
 const url = "data/db.json";
 
 const alertUser = function (params) {
   alert(params);
+};
+
+const handleCreateElement = function (name, element, className, text) {
+  name = document.createElement(element);
+  name.classList.add(className);
+  name.textContent = text;
+  return name;
+};
+
+const handleAppendElement = function (appender, appendee) {
+  appender.appendChild(appendee);
+};
+
+const handleFilterByRole_Level = function (passedJobs, categoryPassed) {
+  passedJobs.forEach((job) => {
+    if (
+      job.getAttribute(`data-role`) === categoryPassed &&
+      job.getAttribute(`data-level`) === categoryPassed
+    ) {
+      job.style.display = "flex";
+    } else if (
+      job.getAttribute(`data-role`) === categoryPassed ||
+      job.getAttribute(`data-level`) === categoryPassed
+    ) {
+    } else {
+      job.style.display = "None";
+    }
+  });
 };
 
 const renderListings = async () => {
@@ -60,9 +89,32 @@ const renderListings = async () => {
     `;
     });
     contentsContainer.innerHTML = template;
+    jobs = document.querySelectorAll(".content");
+    buttonsContainer = document.querySelectorAll(".right");
   } catch (error) {
     alertUser(error);
   }
 };
 
-window.addEventListener("DOMContentLoaded", () => renderListings());
+window.addEventListener("DOMContentLoaded", () => {
+  renderListings().then(() => {
+    const tabOverall = handleCreateElement("tabOverall", "div", "tabover");
+    const tabcont = handleCreateElement("tabcont", "div", "tabcont");
+    const tabClear = handleCreateElement("tabClear", "p", "tabclear", "Clear");
+    handleAppendElement(tabOverall, tabcont);
+    handleAppendElement(tabOverall, tabClear);
+    buttonsContainer.forEach((cont) => {
+      cont.addEventListener("click", (e) => {
+        if (e.target.classList.contains("categories")) {
+          let category = e.target.textContent.trim();
+          const tab = handleCreateElement("tab", "p", "tab");
+          tab.innerHTML = `${category} <span class='tab-span'>&times</span>`;
+          handleAppendElement(tabcont, tab);
+          document.querySelector(".contents").prepend(tabOverall);
+          handleFilterByRole_Level(jobs, category);
+        }
+      });
+    });
+  });
+});
+
