@@ -28,6 +28,12 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
 }
+.content:nth-child(1) {
+  border-left: 5px solid hsl(180, 29%, 50%);
+}
+.content:nth-child(2) {
+  border-left: 5px solid hsl(180, 29%, 50%);
+}
 .content {
   width: 800px;
   margin-top: 20px;
@@ -36,8 +42,8 @@ body {
   justify-content: space-between;
   padding: 20px;
   box-shadow: 10px 8px 10px hsla(180 29% 50% / 20%);
-margin-top: 50px;
-
+  margin-top: 50px;
+  border-radius: 5px;
 }
 .left {
   display: flex;
@@ -104,52 +110,46 @@ margin-top: 50px;
   padding: 5px;
   cursor: pointer;
 }
-.contents{
+.contents {
   position: relative;
 }
-
-.tabover{
+.tabover {
   display: flex;
   justify-content: space-between;
-    width: 100%;
+  width: 100%;
   background-color: white;
   padding: 10px;
-    border-radius: 5px;
-position: absolute;
-top: -20px;
+  border-radius: 5px;
+  position: absolute;
+  top: -20px;
   box-shadow: 10px 8px 10px hsla(180 29% 50% / 20%);
 }
-
-.tabcont{
+.tabcont {
   display: flex;
 }
-.tab{
-  padding:0px 0px 0px 10px;
+.tab {
+  padding: 0px 0px 0px 10px;
   background-color: hsl(180, 31%, 95%);
-border-radius: 2px;
-margin-right: 10px;
+  border-radius: 2px;
+  margin-right: 10px;
   color: hsl(180, 29%, 50%);
-font-weight: 600;
-
-
+  font-weight: 600;
 }
-
-.tab-span{
+.tab-span {
   background-color: hsl(180, 29%, 50%);
   font-size: 25px;
   font-weight: 600;
-  padding:0px 5px;
+  padding: 0px 5px;
   text-align: center;
   color: aliceblue;
   margin-left: 5px;
-cursor: pointer;
-border-radius: 2px;
-
+  cursor: pointer;
+  border-radius: 2px;
 }
-.tabclear{
-   color: hsl(180, 29%, 50%);
+.tabclear {
+  color: hsl(180, 29%, 50%);
   font-weight: 600;
-text-decoration: underline;
-cursor: pointer;
-padding-top: 5px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding-top: 5px;
 }

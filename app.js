@@ -92,6 +92,7 @@ const renderListings = async () => {
   </div>
     `;
     });
+
     contentsContainer.innerHTML = template;
     jobs = document.querySelectorAll(".content");
     buttonsContainer = document.querySelectorAll(".right");
