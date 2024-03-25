@@ -22,14 +22,18 @@ const handleAppendElement = function (appender, appendee) {
 
 const handleFilterByRole_Level = function (passedJobs, categoryPassed) {
   passedJobs.forEach((job) => {
+    const jobLanguage = job.getAttribute("data-languages").split(",");
+
     if (
       job.getAttribute(`data-role`) === categoryPassed &&
-      job.getAttribute(`data-level`) === categoryPassed
+      job.getAttribute(`data-level`) === categoryPassed &&
+      jobLanguage.includes(categoryPassed)
     ) {
       job.style.display = "flex";
     } else if (
       job.getAttribute(`data-role`) === categoryPassed ||
-      job.getAttribute(`data-level`) === categoryPassed
+      job.getAttribute(`data-level`) === categoryPassed ||
+      jobLanguage.includes(categoryPassed)
     ) {
     } else {
       job.style.display = "None";
@@ -107,6 +111,7 @@ window.addEventListener("DOMContentLoaded", () => {
       cont.addEventListener("click", (e) => {
         if (e.target.classList.contains("categories")) {
           let category = e.target.textContent.trim();
+          console.log(category);
           handleFilterByRole_Level(jobs, category);
           e.target.classList.add("active");
         }
@@ -115,6 +120,7 @@ window.addEventListener("DOMContentLoaded", () => {
           // Check if tab already exists for the selected category
           if (!tabcont.querySelector(`.tab[data-category="${category}"]`)) {
             const tab = handleCreateElement("tab", "p", "tab");
+            console.log(tab);
             tab.innerHTML = `${category} <span class='tab-span'>&times</span>`;
             tab.setAttribute("data-category", category);
             handleAppendElement(tabcont, tab);
