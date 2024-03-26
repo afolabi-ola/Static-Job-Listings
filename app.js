@@ -23,18 +23,15 @@ const handleAppendElement = function (appender, appendee) {
 const handleFilterByRole_Level = function (passedJobs, categoryPassed) {
   passedJobs.forEach((job) => {
     const jobLanguage = job.getAttribute("data-languages").split(",");
+    const jobtools = job.getAttribute("data-tools").split(",");
 
     if (
-      job.getAttribute(`data-role`) === categoryPassed &&
-      job.getAttribute(`data-level`) === categoryPassed &&
-      jobLanguage.includes(categoryPassed)
-    ) {
-      job.style.display = "flex";
-    } else if (
       job.getAttribute(`data-role`) === categoryPassed ||
       job.getAttribute(`data-level`) === categoryPassed ||
-      jobLanguage.includes(categoryPassed)
+      jobLanguage.includes(categoryPassed) ||
+      jobtools.includes(categoryPassed)
     ) {
+      job.style.display = "flex";
     } else {
       job.style.display = "None";
     }
@@ -54,9 +51,8 @@ const renderListings = async () => {
     let template = "";
     lists.forEach((list, i) => {
       template += `
-    <div class="content" data-role=${list.role} data-level=${
-        list.level
-      } data-languages=${list.languages} data-tools=${list.tools}>
+    <div class="content" data-role=${list.role} data-level=${list.level
+        } data-languages=${list.languages} data-tools=${list.tools}>
     <div class="left">
       <div class="image">
         <img src="${list.logo}" alt="${list.company}" />
@@ -82,11 +78,11 @@ const renderListings = async () => {
       <p class='categories'>${list.role}</p>
       <p class='categories'>${list.level}</p>
       ${list.languages
-        .map((language) => `<p class='categories'>${language}</p>`)
-        .join(" ")}
-      
+          .map((language) => `<p class='categories'>${language}</p>`)
+          .join(" ")}
+
       ${list.tools.map((tool) => `<p class='categories'>${tool}</p>`).join(" ")}
-      
+
     </div>
 
   </div>
