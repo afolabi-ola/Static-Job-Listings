@@ -24,14 +24,19 @@ const handleFilterByRole_Level = function (passedJobs, categoryPassed) {
   passedJobs.forEach((job) => {
     const jobLanguage = job.getAttribute("data-languages").split(",");
     const jobtools = job.getAttribute("data-tools").split(",");
+    if (job.getAttribute(`data-role`) === categoryPassed &&
+      job.getAttribute(`data-level`) === categoryPassed &&
+      jobLanguage.includes(categoryPassed) &&
+      jobtools.includes(categoryPassed)) {
+      job.style.display = "flex";
 
-    if (
+    }
+    else if (
       job.getAttribute(`data-role`) === categoryPassed ||
       job.getAttribute(`data-level`) === categoryPassed ||
       jobLanguage.includes(categoryPassed) ||
       jobtools.includes(categoryPassed)
     ) {
-      job.style.display = "flex";
     } else {
       job.style.display = "None";
     }
